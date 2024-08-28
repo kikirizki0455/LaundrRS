@@ -24,10 +24,6 @@
                     <input type="text" name="nama_pegawai" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="nomor_pegawai">Password</label>
-                    <input type="text" name="nama_pegawai" class="form-control" required>
-                </div>
-                <div class="form-group">
                     <label for="role_pegawai">Role Pegawai</label>
                     <select name="role_pegawai" class="form-control" required>
                         <option value="" disabled selected>Select role</option>
