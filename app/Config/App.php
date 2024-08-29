@@ -199,4 +199,6 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+    public $CSRFTokenName = 'csrf_test_name';
+    public $CSRFHeaderName = 'X-CSRF-TOKEN';
 }

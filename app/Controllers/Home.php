@@ -6,21 +6,36 @@ use App\Controllers\BaseController;
 
 class Home extends BaseController
 {
-    public function index(){
-        $builder = $this->db->table('pegawai');
-        $query = $builder->get();
-        $data = [
+    public function index()
+    {
+        $builderPegawai = $this->db->table('pegawai');
+        $queryPegawai = $builderPegawai->get();
+        $pegawai = $queryPegawai->getResult();
 
+        $builderBarang = $this->db->table('barang');
+        $queryBarang = $builderBarang->get();
+        $barang = $queryBarang->getResult();
+
+
+        $builderBahan = $this->db->table('bahan');
+        $queryBahan =  $builderBahan->get();
+        $bahan = $queryBahan->getResult();
+        $data = [
             'title' => 'Home | Laundry',
-            'pegawai' => $query->getResult()
+            'pegawai' => $pegawai,
+            'barang' => $barang,
+            'bahan' => $bahan
+
         ];
         return view('home', $data);
     }
+
 
     public function tambah_pegawai()
     {
         $data = [
             'title' => 'Tambah Pegawai | Laundry',
+
         ];
         return view('tambah_pegawai', $data);
     }
@@ -47,7 +62,7 @@ class Home extends BaseController
             return redirect()->back()->with('error', 'Gagal menyimpan data.');
         }
     }
-    public function edit($id)
+    public function edit_pegawai($id)
     {
         $builder = $this->db->table('pegawai');
         $builder->where('id_pegawai', $id);
@@ -72,7 +87,8 @@ class Home extends BaseController
             return redirect()->to(site_url('home'))->with('success', 'Data berhasil diperbarui');
         }
     }
-    public function delete($id)
+
+    public function delete_pegawai($id)
     {
         $this->db->table('pegawai')->delete(['id_pegawai' => $id]);
 
@@ -81,5 +97,121 @@ class Home extends BaseController
         } else {
             return redirect()->to(site_url('home'))->with('error', 'Gagal menghapus data.');
         }
+    }
+
+
+    // barang
+
+    public function update_barang()
+    {
+        $id = $this->request->getPost('nama_barang');
+        $data = [
+            'nama_barang' => $this->request->getPost('nama_barang'),
+            'stok' => $this->request->getPost('stok'),
+        ];
+
+        $this->db->table('barang')->update($data, ['id' => $id]);
+
+        if ($this->db->affectedRows() > 0) {
+            return redirect()->to(site_url('home'))->with('success', 'Data berhasil diperbarui');
+        }
+    }
+
+    public function delete_barang($id)
+    {
+        $this->db->table('barang')->delete(['id' => $id]);
+
+        if ($this->db->affectedRows() > 0) {
+            return redirect()->to(site_url('home'))->with('success', 'Data berhasil dihapus.');
+        } else {
+            return redirect()->to(site_url('home'))->with('error', 'Gagal menghapus data.');
+        }
+    }
+
+    public function tambah_barang()
+    {
+        $data = [
+            'title' => 'Tambah Barang | Laundry',
+        ];
+        return view('tambah_barang', $data);
+    }
+
+    public function store_barang()
+    {
+        $data = $this->request->getPost();
+
+
+        // Menggunakan tabel yang benar
+        $this->db->table('barang')->insert([
+            'nama_barang' => $data['nama_barang'],
+            'stok' => $data['stok'],
+        ]);
+
+        if ($this->db->affectedRows() > 0) {
+            return redirect()->to(site_url('home'))->with('success_barang', 'Data barang berhasil disimpan.');
+        } else {
+            return redirect()->back()->with('error_barang', 'Gagal menyimpan data barang.');
+        }
+    }
+
+    public function edit_barang($id)
+    {
+        $builder = $this->db->table('barang');
+        $builder->where('id', $id);
+        $data['barang'] = $builder->get()->getRow();
+        $data['title'] = 'Edit Pegawai | Laundry';
+
+        return view('edit_barang', $data);
+    }
+
+    //bahan
+
+    public function tambah_bahan()
+    {
+        $data = [
+            'title' => 'Tambah Bahan | Laundry',
+        ];
+        return view('tambah_bahan', $data);
+    }
+    public function update_bahan()
+    {
+        $id = $this->request->getPost('nama_bahan');
+        $data = [
+            'nama_bahan' => $this->request->getPost('nama_bahan'),
+            'stok_bahan' => $this->request->getPost('stok_bahan'),
+        ];
+
+        $this->db->table('barang')->update($data, ['id' => $id]);
+
+        if ($this->db->affectedRows() > 0) {
+            return redirect()->to(site_url('home'))->with('success', 'Data berhasil diperbarui');
+        }
+    }
+    public function store_bahan()
+    {
+        $data = $this->request->getPost();
+
+
+        // Menggunakan tabel yang benar
+        $this->db->table('bahan')->insert([
+            'nama_bahan' => $data['nama_bahan'],
+            'stok_bahan' => $data['stok_bahan'],
+        ]);
+
+        if ($this->db->affectedRows() > 0) {
+            return redirect()->to(site_url('home'))->with('success_barang', 'Data bahan berhasil disimpan.');
+        } else {
+            return redirect()->back()->with('error_bahan', 'Gagal menyimpan data bahan.');
+        }
+    }
+
+    public function edit_bahan($id)
+    {
+        $builder = $this->db->table('barang');
+        $builder->where('id', $id);
+        $data['barang'] = $builder->get()->getRow();
+        $data['title'] = 'Edit Pegawai | Laundry';
+
+        return view('edit_barang', $data);
     }
 }
