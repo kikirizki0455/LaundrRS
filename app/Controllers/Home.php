@@ -6,13 +6,9 @@ use App\Controllers\BaseController;
 
 class Home extends BaseController
 {
-    public function index()
-    {
-
+    public function index(){
         $builder = $this->db->table('pegawai');
         $query = $builder->get();
-
-
         $data = [
 
             'title' => 'Home | Laundry',
