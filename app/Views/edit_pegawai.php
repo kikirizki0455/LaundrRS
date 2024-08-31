@@ -7,7 +7,7 @@
             <h4>Edit Pegawai</h4>
         </div>
         <div class="card-body col-md-15">
-            <form action="<?= site_url('home/update'); ?>" method="POST" autocomplete="off">
+            <form action="<?= site_url('update_pegawai'); ?>" method="post">
                 <?= csrf_field(); ?>
                 <input type="hidden" name="id_pegawai" value="<?= esc($pegawai->id_pegawai); ?>">
                 <div class="form-group">
@@ -21,15 +21,14 @@
                 <div class="form-group">
                     <label for="role_pegawai">Role Pegawai</label>
                     <select name="role_pegawai" class="form-control" required>
-                        <option value="" disabled>Select role</option>
-                        <option value="pengelola" <?= $pegawai->role_pegawai === 'pengelola' ? 'selected' : ''; ?>>Pengelola</option>
-                        <option value="distribusi" <?= $pegawai->role_pegawai === 'distribusi' ? 'selected' : ''; ?>>Distribusi</option>
-                        <option value="admin" <?= $pegawai->role_pegawai === 'admin' ? 'selected' : ''; ?>>Admin</option>
+                        <option value="pengelola" <?= $pegawai->role_pegawai == 'pengelola' ? 'selected' : ''; ?>>Pengelola</option>
+                        <option value="distribusi" <?= $pegawai->role_pegawai == 'distribusi' ? 'selected' : ''; ?>>Distribusi</option>
+                        <option value="admin" <?= $pegawai->role_pegawai == 'admin' ? 'selected' : ''; ?>>Admin</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-success">Simpan</button>
-                <a href="<?= site_url('home'); ?>" class="btn btn-secondary">Batal</a>
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
             </form>
+
         </div>
     </div>
 </section>

@@ -4,29 +4,39 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class UpdateNomorPegawaiColumn extends Migration
+class CreateTimbanganTable extends Migration
 {
     public function up()
     {
-        // Mengubah tipe data kolom 'nomor_pegawai' menjadi VARCHAR(20)
-        $this->forge->modifyColumn('pegawai', [
-            'nomor_pegawai' => [
+        $this->forge->addField([
+            'id_timbangan' => [
+                'type'           => 'INT',
+                'unsigned'       => true,
+                'auto_increment' => true
+            ],
+            'berat_barang' => [
+                'type' => 'FLOAT',
+                'null' => false,
+            ],
+            'nama_barang' => [
                 'type' => 'VARCHAR',
-                'constraint' => 20,
-                'null' => false
-            ]
+                'constraint' => '255',
+                'null' => false,
+            ],
+            'status' => [
+                'type' => 'ENUM',
+                'constraint' => ['pending', 'in_progress', 'completed'],
+                'default' => 'pending',
+                'null' => false,
+            ],
         ]);
+
+        $this->forge->addKey('id_timbangan', true);
+        $this->forge->createTable('timbangan');
     }
 
     public function down()
     {
-        // Mengembalikan tipe data kolom 'nomor_pegawai' ke INT jika diperlukan
-        $this->forge->modifyColumn('pegawai', [
-            'nomor_pegawai' => [
-                'type' => 'INT',
-                'constraint' => 10,
-                'null' => false
-            ]
-        ]);
+        $this->forge->dropTable('timbangan');
     }
 }

@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header">
             <div class="section-header-button">
-                <a href="<?= site_url('home'); ?>" class="btn"><i class="fas fa-arrow-left"></i></a>
+                <a href="<?= site_url('data_pegawai'); ?>" class="btn"><i class="fas fa-arrow-left"></i></a>
             </div>
             <h4 class="header-register ml-4">Tambah Pegawai</h4>
         </div>
@@ -13,18 +13,14 @@
 
 
         <div class="card-body col-md-15">
-            <form action="<?= site_url('home'); ?>" method="post" autocomplete="off">
-
+            <form action="<?= site_url('store_pegawai'); ?>" method="post" autocomplete="off">
+                <?= csrf_field(); ?>
                 <div class="form-group">
                     <label for="nomor_pegawai">Nomor Pegawai</label>
                     <input type="text" name="nomor_pegawai" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="nomor_pegawai">Nama Pegawai</label>
-                    <input type="text" name="nama_pegawai" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="nomor_pegawai">Password</label>
                     <input type="text" name="nama_pegawai" class="form-control" required>
                 </div>
                 <div class="form-group">

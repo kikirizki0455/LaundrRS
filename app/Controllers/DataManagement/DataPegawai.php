@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\DataManagement;
 
 use App\Controllers\BaseController;
 
-class Home extends BaseController
+class DataPegawai extends BaseController
 {
     public function index()
     {
-
-        $builder = $this->db->table('pegawai');
-        $query = $builder->get();
+        $builderPegawai = $this->db->table('pegawai');
+        $queryPegawai = $builderPegawai->get();
+        $pegawai = $queryPegawai->getResult();
 
 
         $data = [
+            'title' => 'Data Pegawai | Laundry',
+            'pegawai' => $pegawai,
 
-            'title' => 'Home | Laundry',
-            'pegawai' => $query->getResult()
         ];
-        return view('home', $data);
+        return view('data_pegawai', $data);
     }
-
     public function tambah_pegawai()
     {
         $data = [
             'title' => 'Tambah Pegawai | Laundry',
+
         ];
         return view('tambah_pegawai', $data);
     }
@@ -38,20 +38,20 @@ class Home extends BaseController
         $existing = $this->db->table('pegawai')->where('nomor_pegawai', $nomorPegawai)->countAllResults();
 
         if ($existing > 0) {
-            // Jika nomor pegawai sudah ada, tampilkan pesan kesalahan
             return redirect()->back()->with('error', 'Nomor pegawai sudah ada.');
         }
 
-        // Jika nomor pegawai belum ada, simpan data
+        // Insert tanpa ID
         $this->db->table('pegawai')->insert($data);
 
         if ($this->db->affectedRows() > 0) {
-            return redirect()->to(site_url('home'))->with('success', 'Data berhasil disimpan.');
+            return redirect()->to(site_url('data_pegawai'))->with('success', 'Data berhasil disimpan.');
         } else {
             return redirect()->back()->with('error', 'Gagal menyimpan data.');
         }
     }
-    public function edit($id)
+
+    public function edit_pegawai($id)
     {
         $builder = $this->db->table('pegawai');
         $builder->where('id_pegawai', $id);
@@ -61,7 +61,8 @@ class Home extends BaseController
         return view('edit_pegawai', $data);
     }
 
-    public function update()
+
+    public function update_pegawai()
     {
         $id = $this->request->getPost('id_pegawai');
         $data = [
@@ -73,17 +74,21 @@ class Home extends BaseController
         $this->db->table('pegawai')->update($data, ['id_pegawai' => $id]);
 
         if ($this->db->affectedRows() > 0) {
-            return redirect()->to(site_url('home'))->with('success', 'Data berhasil diperbarui');
+            return redirect()->to(site_url('data_pegawai'))->with('success', 'Data berhasil diperbarui');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui data.');
         }
     }
-    public function delete($id)
+
+
+    public function delete_pegawai($id)
     {
         $this->db->table('pegawai')->delete(['id_pegawai' => $id]);
 
         if ($this->db->affectedRows() > 0) {
-            return redirect()->to(site_url('home'))->with('success', 'Data berhasil dihapus.');
+            return redirect()->to(site_url('data_pegawai'))->with('success', 'Data berhasil dihapus.');
         } else {
-            return redirect()->to(site_url('home'))->with('error', 'Gagal menghapus data.');
+            return redirect()->to(site_url('data_pegawai'))->with('error', 'Gagal menghapus data.');
         }
     }
 }
