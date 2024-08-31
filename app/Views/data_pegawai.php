@@ -50,17 +50,22 @@
                                 <td><?= esc($value->role_pegawai); ?></td>
                                 <td>
                                     <!-- edit pegawai -->
+
                                     <a href="<?= site_url('edit_pegawai/' . esc($value->id_pegawai)); ?>" class="btn btn-primary">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
                                     <!-- hapus data pegawai -->
                                     <form action="<?= site_url('delete_pegawai/' . esc($value->id_pegawai)); ?>" method="POST" style="display:inline;">
-                                        <?= csrf_field(); ?>
-                                        <input type="hidden" name="_method" value="DELETE"> <!-- Method spoofing -->
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                            <i class="fas fa-trash"></i> Hapus
-                                        </button>
-                                    </form>
+
+
+                                        <!-- hapus data pegawai -->
+                                        <form action="<?= site_url('home/delete_pegawai/' . esc($value->id_pegawai)); ?>" method="POST" style="display:inline;">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="_method" value="DELETE"> <!-- Method spoofing -->
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -69,5 +74,6 @@
             </div>
         </div>
     </div>
+
 </section>
 <?= $this->endSection(); ?>

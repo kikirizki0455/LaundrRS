@@ -13,6 +13,7 @@ $routes->get('create-db', function () {
 
 $routes->get('/', 'Login::index');
 
+
 $routes->get('dashboard', 'Dashboard::index');
 
 // data pegawai
@@ -39,6 +40,8 @@ $routes->post('store_bahan', 'DataManagement\DataBahan::store_bahan');
 $routes->get('edit_bahan/(:num)', 'DataManagement\DataBahan::edit_bahan/$1');
 $routes->post('update_bahan', 'DataManagement\DataBahan::update_bahan');
 $routes->delete('/delete_bahan/(:num)', 'DataManagement\DataBahan::delete_bahan/$1');
+
+
 
 
 $routes->get('/login', 'Login::index');

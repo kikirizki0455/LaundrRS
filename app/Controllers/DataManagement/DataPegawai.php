@@ -13,13 +13,19 @@ class DataPegawai extends BaseController
         $pegawai = $queryPegawai->getResult();
 
 
+
         $data = [
             'title' => 'Data Pegawai | Laundry',
             'pegawai' => $pegawai,
+            'title' => 'Home | Laundry',
+            'pegawai' => $pegawai,
+
 
         ];
         return view('data_pegawai', $data);
     }
+
+
     public function tambah_pegawai()
     {
         $data = [
@@ -79,8 +85,6 @@ class DataPegawai extends BaseController
             return redirect()->back()->with('error', 'Gagal memperbarui data.');
         }
     }
-
-
     public function delete_pegawai($id)
     {
         $this->db->table('pegawai')->delete(['id_pegawai' => $id]);

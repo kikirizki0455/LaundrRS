@@ -4,6 +4,7 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
+
             <div class="section-header-button">
                 <a href="<?= site_url('data_barang'); ?>" class="btn"><i class="fas fa-arrow-left"></i></a>
             </div>
@@ -29,9 +30,9 @@
                 </div>
                 <button type="submit" class="btn btn-success">Simpan</button>
                 <a href="<?= site_url('data_barang'); ?>" class="btn btn-secondary">Batal</a>
-            </form>
+
         </div>
-    </div>
+
 </section>
 
 <?= $this->endSection(); ?>
