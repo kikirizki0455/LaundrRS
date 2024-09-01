@@ -12,7 +12,7 @@
         <div class="card-body col-md-15">
             <form action="<?= site_url('update_bahan'); ?>" method="POST" autocomplete="off">
                 <?= csrf_field(); ?>
-                <input type="hidden" name="id" value="<?= esc($bahan->id); ?>">
+                <input type="hidden" name="id_bahan" value="<?= esc($bahan->id_bahan); ?>">
                 <div class="form-group">
                     <label for="nama_bahan">Nama Bahan </label>
                     <select name="nama_bahan" class="form-control" required>

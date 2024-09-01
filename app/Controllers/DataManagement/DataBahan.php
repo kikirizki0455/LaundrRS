@@ -45,31 +45,31 @@ class DataBahan extends BaseController
     }
     public function update_bahan()
     {
-        $id = $this->request->getPost('id');
+        $id_bahan = $this->request->getPost('id_bahan');
         $data = [
             'nama_bahan' => $this->request->getPost('nama_bahan'),
             'stok_bahan' => $this->request->getPost('stok_bahan'),
         ];
 
-        $this->db->table('bahan')->update($data, ['id' => $id]);
+        $this->db->table('bahan')->update($data, ['id_bahan' => $id_bahan]);
 
         if ($this->db->affectedRows() > 0) {
             return redirect()->to(site_url('data_bahan'))->with('success', 'Data berhasil diperbarui');
         }
     }
 
-    public function edit_bahan($id)
+    public function edit_bahan($id_bahan)
     {
         $builder = $this->db->table('bahan');
-        $builder->where('id', $id);
+        $builder->where('id_bahan', $id_bahan);
         $data['bahan'] = $builder->get()->getRow();
         $data['title'] = 'Edit Bahan | Laundry';
 
         return view('edit_bahan', $data);
     }
-    public function delete_bahan($id)
+    public function delete_bahan($id_bahan)
     {
-        $this->db->table('bahan')->delete(['id' => $id]);
+        $this->db->table('bahan')->delete(['id_bahan' => $id_bahan]);
 
         if ($this->db->affectedRows() > 0) {
             return redirect()->to(site_url('data_bahan'))->with('success', 'Data berhasil dihapus.');

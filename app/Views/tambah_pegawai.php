@@ -32,6 +32,14 @@
                         <option value="admin">Admin</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Password</label>
+                    <input type="text" name="password" class="form-control" required>
+                </div>
                 <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"></i> Simpan</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
             </form>

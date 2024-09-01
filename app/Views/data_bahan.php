@@ -50,11 +50,11 @@
                                 <td><?= esc($value->stok_bahan); ?></td>
                                 <td>
                                     <!-- edit barang -->
-                                    <a href="<?= site_url('edit_bahan/' . esc($value->id)); ?>" class="btn btn-primary">
+                                    <a href="<?= site_url('edit_bahan/' . esc($value->id_bahan)); ?>" class="btn btn-primary">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
                                     <!-- hapus data barang -->
-                                    <form action="<?= site_url('delete_bahan/' . esc($value->id)); ?>" method="POST" style="display:inline;">
+                                    <form action="<?= site_url('delete_bahan/' . esc($value->id_bahan)); ?>" method="POST" style="display:inline;">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="_method" value="DELETE"> <!-- Method spoofing -->
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">

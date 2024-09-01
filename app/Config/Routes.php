@@ -41,19 +41,27 @@ $routes->get('edit_bahan/(:num)', 'DataManagement\DataBahan::edit_bahan/$1');
 $routes->post('update_bahan', 'DataManagement\DataBahan::update_bahan');
 $routes->delete('/delete_bahan/(:num)', 'DataManagement\DataBahan::delete_bahan/$1');
 
-
+$routes->get('dashboard/show_modal/(:num)', 'Dashboard::show_modal/$1');
+$routes->post('dashboard/tambah_stok', 'Dashboard::tambah_stok');
 
 
 $routes->get('/login', 'Login::index');
 $routes->post('/login', 'Login::index');
 $routes->get('/register', 'Register::index');
 
+// $routes->group('pengelolaan', function ($routes) {
+//     $routes->get('pencucian', 'Pengelolaan\Pencucian::index');
+// });
 
-$routes->group('pengelolaan', ['namespace' => 'App\Controllers\Pengelolaan'], function ($routes) {
-    $routes->get('', 'Pengelolaan::index'); // Rute untuk halaman utama Pengelolaan
-    $routes->get('timbangan', 'Pengelolaan::timbangan'); // Rute untuk halaman Timbangan
-    $routes->get('create', 'Pengelolaan::create'); // Rute untuk halaman create
+$routes->group('pengelolaan', function ($routes) {
+    $routes->get('pencucian', 'Pengelolaan\Pencucian::index');
+    // $routes->get('pencucian/tambah_pencucian', 'Pengelolaan\Pencucian::tambah_pencucian');
+    //     $routes->post('pencucian/store', 'Pengelolaan\Pencucian::store');
+    //     $routes->get('pencucian/edit/(:num)', 'Pengelolaan\Pencucian::edit/$1');
+    //     $routes->post('pencucian/update/(:num)', 'Pengelolaan\Pencucian::update/$1');
+    //     $routes->get('pencucian/delete/(:num)', 'Pengelolaan\Pencucian::delete/$1');
 });
+
 
 
 

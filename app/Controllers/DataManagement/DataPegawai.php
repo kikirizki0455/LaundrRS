@@ -16,11 +16,7 @@ class DataPegawai extends BaseController
 
         $data = [
             'title' => 'Data Pegawai | Laundry',
-            'pegawai' => $pegawai,
-            'title' => 'Home | Laundry',
-            'pegawai' => $pegawai,
-
-
+            'pegawai' => $pegawai
         ];
         return view('data_pegawai', $data);
     }
@@ -74,7 +70,9 @@ class DataPegawai extends BaseController
         $data = [
             'nomor_pegawai' => $this->request->getPost('nomor_pegawai'),
             'nama_pegawai' => $this->request->getPost('nama_pegawai'),
-            'role_pegawai' => $this->request->getPost('role_pegawai')
+            'role_pegawai' => $this->request->getPost('role_pegawai'),
+            'email'        => $this->request->getPost('email'),
+            'password' => $this->request->getPost('password')
         ];
 
         $this->db->table('pegawai')->update($data, ['id_pegawai' => $id]);

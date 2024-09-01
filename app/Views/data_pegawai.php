@@ -38,8 +38,8 @@
                             <th>Nomor Pegawai</th>
                             <th>Nama</th>
                             <th>Role</th>
-                            <th>Aksi</th> <!-- Tambahkan kolom aksi -->
-                            <th>Aksi</th> <!-- Tambahkan kolom aksi -->
+                            <th>Email</th> <!-- Tambahkan kolom aksi -->
+                            <th>Password</th> <!-- Tambahkan kolom aksi -->
                             <th>Aksi</th> <!-- Tambahkan kolom aksi -->
                         </tr>
                         <?php foreach ($pegawai as $key => $value): ?>
@@ -48,6 +48,8 @@
                                 <td><?= esc($value->nomor_pegawai); ?></td>
                                 <td><?= esc($value->nama_pegawai); ?></td>
                                 <td><?= esc($value->role_pegawai); ?></td>
+                                <td><?= esc($value->email); ?></td>
+                                <td><?= esc($value->password); ?></td>
                                 <td>
                                     <!-- edit pegawai -->
 

@@ -30,13 +30,13 @@ class DataBarang extends BaseController
 
     public function update_barang()
     {
-        $id = $this->request->getPost('id');
+        $id_barang = $this->request->getPost('id_barang');
         $data = [
             'nama_barang' => $this->request->getPost('nama_barang'),
             'stok' => $this->request->getPost('stok'),
         ];
 
-        $this->db->table('barang')->update($data, ['id' => $id]);
+        $this->db->table('barang')->update($data, ['id_barang' => $id_barang]);
 
         if ($this->db->affectedRows() > 0) {
             return redirect()->to(site_url('data_barang'))->with('success', 'Data berhasil diperbarui');
@@ -62,9 +62,9 @@ class DataBarang extends BaseController
             return redirect()->back()->with('error_barang', 'Gagal menyimpan data barang.');
         }
     }
-    public function delete_barang($id)
+    public function delete_barang($id_barang)
     {
-        $this->db->table('barang')->delete(['id' => $id]);
+        $this->db->table('barang')->delete(['id_barang' => $id_barang]);
 
         if ($this->db->affectedRows() > 0) {
             return redirect()->to(site_url('data_barang'))->with('success', 'Data berhasil dihapus.');
@@ -72,10 +72,10 @@ class DataBarang extends BaseController
             return redirect()->to(site_url('data_barang'))->with('error', 'Gagal menghapus data.');
         }
     }
-    public function edit_barang($id)
+    public function edit_barang($id_barang)
     {
         $builder = $this->db->table('barang');
-        $builder->where('id', $id);
+        $builder->where('id_barang', $id_barang);
         $data['barang'] = $builder->get()->getRow();
         $data['title'] = 'Edit Pegawai | Laundry';
 
